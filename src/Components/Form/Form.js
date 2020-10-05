@@ -40,7 +40,20 @@ export default class Form extends Component {
           this.clearForm();
         })
         .catch(err => console.log('axios error', err))
-      }
+    }
+    handleEdit() {
+      let { id, name, price, img } = this.state;
+      let product = {name,price,img}
+      axios
+        .put(`/api/updateProduct/${id}`, product)
+        .then(res => {
+          this.props.getInventoryFn();
+          this.clearForm();})
+        .catch(err => console.log('axios error', err))
+      
+    }
+
+  
 
     clearForm = () => {
         this.setState({id: null})
